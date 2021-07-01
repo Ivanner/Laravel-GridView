@@ -161,6 +161,10 @@ abstract class BaseColumn
      */
     public function renderValue($row)
     {
+        // QueryBuilder returns objects instead of arrays
+        if (!is_array($row)){
+            $row = (array)$row;
+        }
         $value = $this->_renderValue($row);
 
         foreach ($this->formatters as $formatter) {

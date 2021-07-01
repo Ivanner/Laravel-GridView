@@ -2,7 +2,7 @@
 /**
 * @var \Woo\GridView\GridView $grid
 **/
-    use Woo\GridView\GridView;$paginator = $grid->getPagination();
+    $paginator = $grid->getPagination();
     $thisStart = 1 + ($paginator->currentPage() - 1) * $paginator->perPage();
     $thisEnd = $paginator->currentPage() * $paginator->perPage()
 @endphp
@@ -48,7 +48,7 @@
                     @endif
                 </thead>
                 <tbody>
-                @forelse ($grid->getPagination()->items() as $row)
+                @forelse ($paginator->items() as $row)
                     <tr>
                         @foreach ($grid->columns as $column)
                             <td {!! $column->compileContentHtmlOptions(['model' => $row]) !!}>
@@ -66,7 +66,7 @@
                 </tbody>
                 @if ($grid->rowsPerPage != 0)
                     <caption>
-                        {!! $grid->getPagination()->render('woo_gridview::grid-pagination', ['gridId' => $grid->getId()]) !!}
+                        {!! $paginator->render('woo_gridview::grid-pagination', ['gridId' => $grid->getId()]) !!}
                     </caption>
                 @endif
             </table>
