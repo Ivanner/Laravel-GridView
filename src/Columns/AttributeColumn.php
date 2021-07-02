@@ -42,7 +42,7 @@ class AttributeColumn extends BaseColumn
      */
     public function _renderValue($row)
     {
-        $path = $row;
+        $path = (array)$row;
         $exp = explode('.', $this->value);
 
         /**

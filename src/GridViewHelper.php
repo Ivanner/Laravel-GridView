@@ -14,6 +14,8 @@ use Woo\GridView\Columns\CallbackColumn;
 use Woo\GridView\Columns\ViewColumn;
 use Woo\GridView\Filters\DropdownFilter;
 use Woo\GridView\Filters\TextFilter;
+use Woo\GridView\Formatters\BooleanFormatter;
+use Woo\GridView\Formatters\CurrencyFormatter;
 use Woo\GridView\Formatters\EmailFormatter;
 use Woo\GridView\Formatters\ImageFormatter;
 use Woo\GridView\Formatters\RawFormatter;
@@ -41,6 +43,8 @@ class GridViewHelper
             'text' => TextFormatter::class,
             'url' => UrlFormatter::class,
             'raw' => RawFormatter::class,
+            'boolean' => BooleanFormatter::class,
+            'currency' => CurrencyFormatter::class,
         ],
         'filter' => [
             'text' => TextFilter::class,
