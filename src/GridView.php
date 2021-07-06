@@ -16,6 +16,9 @@ use Woo\GridView\Traits\Configurable;
 class GridView
 {
     use Configurable;
+	const FILTER_POS_HEADER='header';
+	const FILTER_POS_FOOTER='footer';
+	const FILTER_POS_BODY='body';
 
     /**
      * Counter for ids
@@ -80,6 +83,16 @@ class GridView
      * @var bool
      */
     public $showFilters = true;
+	
+	/**
+	 * @var string whether the filters should be displayed in the grid view. Valid values include:
+	 * <ul>
+	 *    <li>header: the filters will be displayed on top of each column's header cell.</li>
+	 *    <li>body: the filters will be displayed right below each column's header cell.</li>
+	 *    <li>footer: the filters will be displayed below each column's footer cell.</li>
+	 * </ul>
+	 */
+	public $filterPosition=self::FILTER_POS_BODY;
 
     /**
      * Flags allow to change standalone vue to. If false, GridView component should be included in your root Vue instance
@@ -88,10 +101,37 @@ class GridView
     public $standaloneVue = true;
 
     /**
-     * List of additinal params which'll be added to filter requests
+     * List of additional params which will be added to filter requests
      * @var array
      */
     public $additionalRequestParams = [];
+	
+    /**
+     * If it is set false, it means sorting and pagination will be performed in normal page requests
+     * instead of AJAX requests.
+     * @var bool
+     */
+    public $ajaxUpdate= false;
+	
+	/**
+	 * The URL the requests should be sent to. If not set, the current page URL will be used for requests.
+	 * @var string
+	 */
+    public $targetUrl = '';
+	/**
+	 * @var boolean whether to enable pagination.  When pagination is enabled, a pager will be displayed
+	 * in the view so that it can trigger pagination of the data display.
+	 * Defaults to true.
+	 */
+    public $enablePagination = true;
+	
+	/**
+	 * @var boolean whether to enable sorting. When sorting is enabled,
+	 * sortable columns will have their headers clickable to trigger sorting along that column.
+	 * Defaults to true.
+	 * @see sortableAttributes
+	 */
+	public $enableSorting=true;
 
     /**
      * @var Paginator

@@ -14,20 +14,37 @@
         :origin-filters='@json($filters)'
         sort-column="{{ $grid->getRequest()->sortColumn }}"
         sort-order="{{ $grid->getRequest()->sortOrder }}"
+        ajaxUpdate="{{ $grid->ajaxUpdate?1:0 }}"
+        targetUrl="{{ $grid->targetUrl }}"
     >
         <div>
             @include('woo_gridview::grid-form')
-            @if ($paginator->hasPages())
+            @if ($paginator->hasPages() && $grid->enablePagination)
                 <div class="summary">Displaying {{$thisStart}}-{{$thisEnd}} of {{$paginator->total()}} results.</div>
             @endif
             <table {!! $grid->compileTableHtmlOptions() !!}>
                 <thead>
+                @if ($grid->showFilters && $grid->filterPosition == \Woo\GridView\GridView::FILTER_POS_HEADER)
+                    <tr>
+                        @foreach ($grid->columns as $column)
+                            <th>
+                                @if ($column->filter)
+                                    {!! $column->filter->render($grid) !!}
+                                @endif
+                            </th>
+                        @endforeach
+                    </tr>
+                @endif
                     <tr>
                         @foreach ($grid->columns as $column)
                             <th {!! $column->compileHeaderHtmlOptions() !!}>
-                                <a href="#" @if ($column->getSortableName() !== false) v-on:click="sort('{{ $column->getSortableName() }}')" @endif>{{ $column->title }}</a>
+                                @if ($column->getSortableName() !== false && $grid->enableSorting)
+                                    <a href="#" v-on:click.prevent="sort('{{ $column->getSortableName() }}')">{{ $column->title }}</a>
+                                @else
+                                    {{ $column->title }}
+                                @endif
 
-                                @if ($column->sortable)
+                                @if ($column->sortable && $grid->enableSorting)
                                     @if ($grid->getRequest()->sortColumn == $column->value)
                                         <span class="sort-{{ strtolower($grid->getRequest()->sortOrder) }}"></span>
                                     @endif
@@ -35,7 +52,7 @@
                             </th>
                         @endforeach
                     </tr>
-                    @if ($grid->showFilters)
+                    @if ($grid->showFilters && $grid->filterPosition == \Woo\GridView\GridView::FILTER_POS_BODY)
                         <tr>
                             @foreach ($grid->columns as $column)
                                 <th>
@@ -64,7 +81,20 @@
                         </tr>
                     @endforelse
                 </tbody>
-                @if ($grid->rowsPerPage != 0)
+                <tfoot>
+                @if ($grid->showFilters && $grid->filterPosition == \Woo\GridView\GridView::FILTER_POS_FOOTER)
+                    <tr>
+                        @foreach ($grid->columns as $column)
+                            <th>
+                                @if ($column->filter)
+                                    {!! $column->filter->render($grid) !!}
+                                @endif
+                            </th>
+                        @endforeach
+                    </tr>
+                @endif
+                </tfoot>
+                @if ($grid->rowsPerPage != 0 && $grid->enablePagination)
                     <caption>
                         {!! $paginator->render('woo_gridview::grid-pagination', ['gridId' => $grid->getId()]) !!}
                     </caption>

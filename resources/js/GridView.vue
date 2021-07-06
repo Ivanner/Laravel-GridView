@@ -4,7 +4,9 @@
             id: String,
             originFilters: Object,
             sortBy: String,
-            sortOrder: String
+            sortOrder: String,
+            ajaxUpdate: Boolean,
+            targetUrl: String
         },
 
         data() {
@@ -45,7 +47,16 @@
             },
 
             sendForm() {
+              if (!this.ajaxUpdate) {
                 this.$refs.gridForm.submit();
+              } else {
+                let formData = new FormData(this.$refs.gridForm);
+                fetch(this.targetUrl, formData)
+                    .then(function (data) {
+                      this.dataset = data;
+                    })
+              }
+
             }
         }
     };
