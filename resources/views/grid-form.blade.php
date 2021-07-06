@@ -4,6 +4,9 @@
     **/
 @endphp
 <form class="grid-form" action="{{ $grid->targetUrl }}" method="{{ $grid->method }}" style="display: none;" ref="gridForm">
+    @if (strtoupper($grid->method) == 'POST')
+        @csrf
+    @endif
     <input type="hidden" name="{{ $grid->getId() == 0 ? 'sort' : 'grid[' . $grid->getId() . '][sort]' }}" :value="sortColumn">
     <input type="hidden" name="{{ $grid->getId() == 0 ? 'order' : 'grid[' . $grid->getId() . '][order]' }}" :value="sortDesc ? 'DESC' : 'ASC'">
     @if ($grid->ajaxUpdate)
