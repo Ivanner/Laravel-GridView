@@ -101,13 +101,14 @@ __webpack_require__.r(__webpack_exports__);
     originFilters: Object,
     sortBy: String,
     sortOrder: String,
-    ajaxUpdate: Boolean,
+    ajaxUpdate: String,
     targetUrl: String
   },
   data: function data() {
     return {
       filters: Object.assign({}, this.originFilters),
       sortDesc: this.sortOrder === 'DESC',
+      useAjax: this.ajaxUpdate === 'true' || parseInt(this.ajaxUpdate) === 1,
       sortColumn: this.sortBy,
       filterTimeout: null
     };
@@ -143,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendForm: function sendForm() {
-      if (!this.ajaxUpdate) {
+      if (!this.useAjax) {
         this.$refs.gridForm.submit();
       } else {
         var formData = new FormData(this.$refs.gridForm);
