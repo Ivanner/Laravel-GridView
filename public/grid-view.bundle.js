@@ -140,7 +140,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendForm: function sendForm() {
-      this.$refs.gridForm.submit();
+        if (!this.ajaxupdate) {
+            this.$refs.gridForm.submit();
+        } else {
+            let formData = new FormData(this.$refs.gridForm);
+            fetch(this.targetUrl, formData)
+                .then(function (data) {
+                    this.dataset = data;
+                })
+        }
     }
   }
 });
