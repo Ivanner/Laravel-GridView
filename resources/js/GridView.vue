@@ -3,14 +3,15 @@
         props: {
             id: String,
             originFilters: Object,
-            sortColumn: String,
+            sortBy: String,
             sortOrder: String
         },
 
         data() {
             return {
-                // filters: Object.assign({}, this.originFilters),
+                filters: Object.assign({}, this.originFilters),
                 sortDesc: this.sortOrder === 'DESC',
+                sortColumn: this.sortBy,
                 filterTimeout: null,
             }
         },
