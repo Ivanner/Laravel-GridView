@@ -14,7 +14,7 @@
         :origin-filters='@json($filters)'
         sort-column="{{ $grid->getRequest()->sortColumn }}"
         sort-order="{{ $grid->getRequest()->sortOrder }}"
-        ajax-update="{{ $grid->ajaxUpdate?1:0 }}"
+        ajax-update={{ $grid->ajaxUpdate }}
         target-url="{{ $grid->targetUrl }}"
     >
         <div>
