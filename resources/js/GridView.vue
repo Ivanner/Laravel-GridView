@@ -9,7 +9,7 @@
 
         data() {
             return {
-                filters: Object.assign({}, this.originFilters),
+                // filters: Object.assign({}, this.originFilters),
                 sortDesc: this.sortOrder === 'DESC',
                 filterTimeout: null,
             }
