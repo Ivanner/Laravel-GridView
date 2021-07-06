@@ -2,11 +2,11 @@
 
 namespace Woo\GridView\DataProviders;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 use Woo\GridView\Exceptions\GridViewConfigException;
 use Woo\GridView\GridViewRequest;
 
-class EloquentDataProvider extends BaseDataProvider
+class QueryDataProvider extends BaseDataProvider
 {
     protected $filters = true;
     protected $ordering = true;
@@ -98,11 +98,11 @@ class EloquentDataProvider extends BaseDataProvider
         $query = $this->baseQuery($request);
 
         if ($request->perPage == 0) {
-            return $query->get();
+            return $query->get()->all();
         }
 
         return $query->offset(($request->page - 1) * $request->perPage)
             ->limit($request->perPage)
-            ->get();
+            ->get()->all();
     }
 }
