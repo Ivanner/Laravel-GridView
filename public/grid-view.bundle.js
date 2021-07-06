@@ -100,7 +100,9 @@ __webpack_require__.r(__webpack_exports__);
     id: String,
     originFilters: Object,
     sortColumn: String,
-    sortOrder: String
+    sortOrder: String,
+    ajaxUpdate: Boolean,
+    targetUrl: String
   },
   data: function data() {
     return {
