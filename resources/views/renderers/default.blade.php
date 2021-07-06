@@ -38,13 +38,13 @@
                     <tr>
                         @foreach ($grid->columns as $column)
                             <th {!! $column->compileHeaderHtmlOptions() !!}>
-                                @if ($column->getSortableName() !== false && $grid->enableSorting)
+                                @if ($column->getSortableName() !== false && $column->sortable)
                                     <a href="#" v-on:click.prevent="sort('{{ $column->getSortableName() }}')">{{ $column->title }}</a>
                                 @else
                                     {{ $column->title }}
                                 @endif
 
-                                @if ($column->sortable && $grid->enableSorting)
+                                @if ($column->sortable)
                                     @if ($grid->getRequest()->sortColumn == $column->value)
                                         <span class="sort-{{ strtolower($grid->getRequest()->sortOrder) }}"></span>
                                     @endif

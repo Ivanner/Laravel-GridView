@@ -114,6 +114,12 @@ class GridView
     public $ajaxUpdate= false;
 	
 	/**
+	 * @var string the type ('GET' or 'POST') of the form requests. Defaults to 'GET'.
+	 * You can set this to 'POST' if you are filtering by many fields at once and have a problem with GET query string length.
+	 */
+	public $method = 'GET';
+	
+	/**
 	 * The URL the requests should be sent to. If not set, the current page URL will be used for requests.
 	 * @var string
 	 */
@@ -124,14 +130,6 @@ class GridView
 	 * Defaults to true.
 	 */
     public $enablePagination = true;
-	
-	/**
-	 * @var boolean whether to enable sorting. When sorting is enabled,
-	 * sortable columns will have their headers clickable to trigger sorting along that column.
-	 * Defaults to true.
-	 * @see sortableAttributes
-	 */
-	public $enableSorting=true;
 
     /**
      * @var Paginator
