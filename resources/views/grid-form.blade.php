@@ -4,10 +4,8 @@
     **/
 @endphp
 <form class="grid-form" action="{{ $grid->targetUrl }}" method="{{ $grid->method }}" style="display: none;" ref="gridForm">
-    @if ($grid->enableSorting)
     <input type="hidden" name="{{ $grid->getId() == 0 ? 'sort' : 'grid[' . $grid->getId() . '][sort]' }}" :value="sortColumn">
     <input type="hidden" name="{{ $grid->getId() == 0 ? 'order' : 'grid[' . $grid->getId() . '][order]' }}" :value="sortDesc ? 'DESC' : 'ASC'">
-    @endif
     @if ($grid->ajaxUpdate)
     <input type="hidden" name="{{ $grid->getId() == 0 ? 'ajaxUpdate' : 'grid[' . $grid->getId() . '][ajaxUpdate]' }}" :value="1">
     @endif
