@@ -3,7 +3,7 @@
         props: {
             id: String,
             originFilters: Object,
-            sortBy: String,
+            sortColumn: String,
             sortOrder: String,
             ajaxUpdate: Boolean,
             targetUrl: String
@@ -13,7 +13,6 @@
             return {
                 filters: Object.assign({}, this.originFilters),
                 sortDesc: this.sortOrder === 'DESC',
-                sortColumn: this.sortBy,
                 filterTimeout: null,
             }
         },
