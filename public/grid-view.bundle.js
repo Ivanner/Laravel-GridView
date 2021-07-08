@@ -136,7 +136,16 @@ __webpack_require__.r(__webpack_exports__);
     ajaxUpdate: Boolean,
     targetUrl: String,
     enablePagination: Boolean,
-    dataset: Object
+    dataset: {
+      type: Object,
+      "default": function _default() {
+        return {
+          pagination: {
+            total: 0
+          }
+        };
+      }
+    }
   },
   data: function data() {
     return {

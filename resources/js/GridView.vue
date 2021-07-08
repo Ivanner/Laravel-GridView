@@ -40,7 +40,12 @@ export default {
     ajaxUpdate: Boolean,
     targetUrl: String,
     enablePagination: Boolean,
-    dataset: Object
+    dataset: {
+      type: Object,
+      default: function () {
+        return {pagination: {total: 0}}
+      }
+    }
   },
 
   data() {
