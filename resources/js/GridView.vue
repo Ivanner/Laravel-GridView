@@ -9,7 +9,7 @@
       </thead>
       <tbody>
       <tr>
-        <td :colspan="columns.length" class="text-center">
+        <td :colspan="columns.length>0?columns.length:null" class="text-center">
           No data to display
         </td>
       </tr>
@@ -33,8 +33,7 @@
 <script>
 export default {
   props: {
-    id: String,
-    originFilters: Object,
+    initialFilters: Object,
     sortBy: String,
     sortOrder: String,
     ajaxUpdate: Boolean,
@@ -50,7 +49,7 @@ export default {
 
   data() {
     return {
-      filters: Object.assign({}, this.originFilters),
+      filters: Object.assign({}, this.initialFilters),
       sortColumn: this.sortBy,
       sortDesc: this.sortOrder === 'DESC',
       useAjax: this.ajaxUpdate,
