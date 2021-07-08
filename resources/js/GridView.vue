@@ -1,3 +1,38 @@
+<template>
+  <div>
+    <div class="summary" v-if="showPagination">Displaying @{{dataset.pagination.first}}-@{{dataset.pagination.last}} of @{{dataset.pagination.total}} results.</div>
+    <table>
+      <thead>
+      <tr v-if="columns.length">
+        <th v-for="column in columns">
+          {{ column.name }}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td :colspan="columns.length" class="text-center">
+          No data to display
+        </td>
+      </tr>
+      </tbody>
+      <caption v-if="showPagination">
+        <ul class="pagination">
+          <li v-for="link in dataset.pagination.links" :key="link.label" v-if="link.url"
+              class="page-item" :class="{disabled: link.disabled, active: link.active}">
+            <a class="page-link"
+               href="#"
+               @click.prevent="fetchData(link.url)"
+               v-html="link.label"
+            >
+            </a>
+          </li>
+        </ul>
+      </caption>
+    </table>
+  </div>
+</template>
+
 <script>
 export default {
   props: {
@@ -5,20 +40,27 @@ export default {
     originFilters: Object,
     sortBy: String,
     sortOrder: String,
-    ajaxUpdate: String,
+    ajaxUpdate: Boolean,
     targetUrl: String,
+    enablePagination: Boolean,
+    dataset: Object
   },
 
   data() {
     return {
       filters: Object.assign({}, this.originFilters),
-      sortDesc: this.sortOrder === 'DESC',
-      useAjax: this.ajaxUpdate === 'true' || parseInt(this.ajaxUpdate) === 1,
       sortColumn: this.sortBy,
+      sortDesc: this.sortOrder === 'DESC',
+      useAjax: this.ajaxUpdate,
       filterTimeout: null,
+      columns: []
     }
   },
-
+  computed: {
+    showPagination() {
+      return this.enablePagination && this.dataset.pagination.total > 0
+    }
+  },
   methods: {
     filter(skipDelay = false) {
 
