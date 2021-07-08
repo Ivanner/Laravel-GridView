@@ -129,8 +129,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    id: String,
-    originFilters: Object,
+    initialFilters: Object,
     sortBy: String,
     sortOrder: String,
     ajaxUpdate: Boolean,
@@ -149,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      filters: Object.assign({}, this.originFilters),
+      filters: Object.assign({}, this.initialFilters),
       sortColumn: this.sortBy,
       sortDesc: this.sortOrder === 'DESC',
       useAjax: this.ajaxUpdate,
@@ -1376,7 +1375,9 @@ var render = function() {
             "td",
             {
               staticClass: "text-center",
-              attrs: { colspan: _vm.columns.length }
+              attrs: {
+                colspan: _vm.columns.length > 0 ? _vm.columns.length : null
+              }
             },
             [_vm._v("\n        No data to display\n      ")]
           )
