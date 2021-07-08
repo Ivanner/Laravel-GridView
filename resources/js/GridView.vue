@@ -4,14 +4,17 @@
     <table>
       <thead>
       <tr v-if="columns.length">
-        <th v-for="column in columns" v-html="column.name"></th>
+        <th v-for="column in columns" v-html="column.title"></th>
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr v-if="dataset.items.length==0">
         <td :colspan="columns.length>0?columns.length:null" class="text-center">
           No data to display
         </td>
+      </tr>
+      <tr v-if="dataset.items.length">
+        <td v-for="column in columns" class="text-center" v-html="column.value"></td>
       </tr>
       </tbody>
       <caption v-if="showPagination">

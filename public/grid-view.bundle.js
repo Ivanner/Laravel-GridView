@@ -127,6 +127,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     initialFilters: Object,
@@ -1361,7 +1364,7 @@ var render = function() {
               "tr",
               _vm._l(_vm.columns, function(column) {
                 return _c("th", {
-                  domProps: { innerHTML: _vm._s(column.name) }
+                  domProps: { innerHTML: _vm._s(column.title) }
                 })
               }),
               0
@@ -1370,18 +1373,33 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("tbody", [
-        _c("tr", [
-          _c(
-            "td",
-            {
-              staticClass: "text-center",
-              attrs: {
-                colspan: _vm.columns.length > 0 ? _vm.columns.length : null
-              }
-            },
-            [_vm._v("\n        No data to display\n      ")]
-          )
-        ])
+        _vm.dataset.items.length == 0
+          ? _c("tr", [
+              _c(
+                "td",
+                {
+                  staticClass: "text-center",
+                  attrs: {
+                    colspan: _vm.columns.length > 0 ? _vm.columns.length : null
+                  }
+                },
+                [_vm._v("\n        No data to display\n      ")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.dataset.items.length
+          ? _c(
+              "tr",
+              _vm._l(_vm.columns, function(column) {
+                return _c("td", {
+                  staticClass: "text-center",
+                  domProps: { innerHTML: _vm._s(column.value) }
+                })
+              }),
+              0
+            )
+          : _vm._e()
       ]),
       _vm._v(" "),
       _vm.showPagination

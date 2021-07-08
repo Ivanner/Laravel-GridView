@@ -8,9 +8,10 @@
             'first' => 1 + ($paginator->currentPage() - 1) * $paginator->perPage(),
             'last' => $paginator->currentPage() * $paginator->perPage(),
             'currentPage' => $paginator->currentPage(),
-            'total' => $paginator-total()
+            'total' => $paginator->total()
         ],
-        'columns' => $grid->columns
+        'columns' => $grid->columns,
+        'items' => $paginator->items()
     ];
 
 @endphp
