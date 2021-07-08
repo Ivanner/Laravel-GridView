@@ -22,9 +22,7 @@
             <table>
                 <thead>
                 <tr v-if="columns.length">
-                    <th v-for="column in columns">
-                        {{ column.name }}
-                    </th>
+                    <th v-for="column in columns" v-html="column.name"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,6 +47,7 @@
                 </caption>
             </table>
         </div>
+
     </grid-view>
 </div>
 
