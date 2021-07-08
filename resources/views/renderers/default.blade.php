@@ -9,7 +9,6 @@
 
 <div class="grid-view-container">
     <grid-view
-        inline-template
         id="grid-{{ $grid->getId() }}"
         :origin-filters='@json($filters)'
         sort-column="{{ $grid->getRequest()->sortColumn }}"
@@ -18,8 +17,6 @@
         target-url="{{ $grid->targetUrl }}"
         :enable-pagination="{{ $grid->enablePagination?"true":"false" }}"
     >
-
-
     </grid-view>
 </div>
 
