@@ -7,9 +7,9 @@
     $thisEnd = $paginator->currentPage() * $paginator->perPage()
 @endphp
 
-<div class="grid-view-container">
+<div class="grid-view-container"
+     id="grid-{{ $grid->getId() }}">
     <grid-view
-        id="grid-{{ $grid->getId() }}"
         :origin-filters='@json($filters)'
         sort-column="{{ $grid->getRequest()->sortColumn }}"
         sort-order="{{ $grid->getRequest()->sortOrder }}"
@@ -17,6 +17,7 @@
         target-url="{{ $grid->targetUrl }}"
         :enable-pagination="{{ $grid->enablePagination?"true":"false" }}"
     >
+
         <div>
             <div class="summary" v-if="showPagination">Displaying @{{dataset.pagination.first}}-@{{dataset.pagination.last}} of @{{dataset.pagination.total}} results.</div>
             <table>
