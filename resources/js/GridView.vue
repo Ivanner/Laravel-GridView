@@ -1,3 +1,35 @@
+<template>
+  <div>
+    <div class="summary" v-if="showPagination">Displaying @{{dataset.pagination.first}}-@{{dataset.pagination.last}} of @{{dataset.pagination.total}} results.</div>
+    <table>
+      <thead>
+      <tr v-if="columns.length">
+        <th v-for="column in columns" v-html="column.name"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td :colspan="columns.length" class="text-center">
+          No data to display
+        </td>
+      </tr>
+      </tbody>
+      <caption v-if="showPagination">
+        <ul class="pagination">
+          <li v-for="link in dataset.pagination.links" :key="link.label" v-if="link.url"
+              class="page-item" :class="{disabled: link.disabled, active: link.active}">
+            <a class="page-link"
+               href="#"
+               @click.prevent="fetchData(link.url)"
+               v-html="link.label"
+            >
+            </a>
+          </li>
+        </ul>
+      </caption>
+    </table>
+  </div>
+</template>
 <script>
 export default {
   props: {

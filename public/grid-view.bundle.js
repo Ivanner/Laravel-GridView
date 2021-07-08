@@ -127,9 +127,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     id: String,
@@ -1355,9 +1352,9 @@ var render = function() {
           ? _c(
               "tr",
               _vm._l(_vm.columns, function(column) {
-                return _c("th", [
-                  _vm._v("\n        " + _vm._s(column.name) + "\n      ")
-                ])
+                return _c("th", {
+                  domProps: { innerHTML: _vm._s(column.name) }
+                })
               }),
               0
             )
